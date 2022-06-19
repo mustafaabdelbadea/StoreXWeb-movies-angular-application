@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddMovieComponent } from 'src/app/components/add-movie/add-movie.component';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -12,6 +12,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class HomeComponent implements OnInit {
   movies!: any[]
   loading: boolean = false
+  ref!: DynamicDialogRef
   constructor(private moviesService: MoviesService, public dialogService: DialogService) { }
 
   ngOnInit(): void {
@@ -36,13 +37,20 @@ export class HomeComponent implements OnInit {
 
 
   addDialog() {
-      const ref = this.dialogService.open(AddMovieComponent, {
+       this.ref = this.dialogService.open(AddMovieComponent, {
           header: 'Add Movie',
           width: '70%',
           contentStyle: { 'max-height': '600px', overflow: 'auto' },
           baseZIndex: 10000,
           dismissableMask: true,
       });
+
+      this.ref.onClose.subscribe((data) => {
+        if (data) {
+          this.movies.push(data.movie) 
+        }
+      });
+
   }
 
   handleNewMovies(event: any) {

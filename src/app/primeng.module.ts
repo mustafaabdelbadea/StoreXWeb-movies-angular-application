@@ -5,13 +5,15 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {FileUploadModule} from 'primeng/fileupload';
 
 const primeNgModules = [
   CardModule,
   InputTextModule,
   ButtonModule,
   DynamicDialogModule,
-  ProgressSpinnerModule
+  ProgressSpinnerModule,
+  FileUploadModule
 ]
 
 
