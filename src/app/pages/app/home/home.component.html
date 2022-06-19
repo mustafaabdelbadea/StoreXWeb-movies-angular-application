@@ -10,6 +10,13 @@
                             </h4>
                         </div>
                         <div class="col-auto">
+                            <input type="number" pInputText [(ngModel)]="category"/>
+                        </div>
+                        <div class="col-auto">
+                            <button pButton type="button" class="p-button-outlined mx-2"  label="filter" (click)="filter()"></button>
+                            <button pButton type="button" class="p-button-outlined mx-2" label="Reset" (click)="listMovies()"></button>
+                        </div>
+                        <div class="col-auto">
                             <button pButton type="button" class="p-button-outlined" label="Add Movie" (click)="addDialog()"></button>
                         </div>
                     </div>

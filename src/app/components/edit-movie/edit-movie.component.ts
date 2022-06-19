@@ -36,18 +36,22 @@ export class EditMovieComponent implements OnInit {
       _method: "delete"
     }
     this.movieService.deleteMovie(inputs, this.movie.id).subscribe((output) => {
-      this.ref.close(this.movie.id)
+      this.ref.close({data: this.movie.id, method: 'delete'})
     })
   }
 
   edit() {
     const inputs ={
+      ...this.movie,
       ...this.updateMovieCtrl.value,
       _method: "put"
     }
 
     this.movieService.updateMovie(inputs, this.movie.id).subscribe((output) => {
       if(output.status === 'success') {
+        this.ref.close({data: output.message, method: 'update'})
+      }
+      else {
         console.log(output);
         
       }

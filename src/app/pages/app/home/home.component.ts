@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   movies!: any[]
   loading: boolean = false
   ref!: DynamicDialogRef
+  category!: number
   constructor(private moviesService: MoviesService, public dialogService: DialogService) { }
 
   ngOnInit(): void {
@@ -25,7 +26,6 @@ export class HomeComponent implements OnInit {
       this.loading = false;
       if(output.status === 'success') {
         this.movies = output.message
-        console.log("🚀 ~ file: home.component.ts ~ line 21 ~ HomeComponent ~ this.moviesService.listMovies ~ this.movies", this.movies)
       } else {
         console.log(output);
       }
@@ -55,5 +55,19 @@ export class HomeComponent implements OnInit {
 
   handleNewMovies(event: any) {
     this.movies = event
+  }
+
+  filter() {
+    this.loading = true;
+    this.moviesService.listByCategory(this.category).subscribe((output) => {
+      this.loading = false;
+      if(output.status === 'success') {
+        this.movies = output.message
+        console.log(output);
+      }
+    }, (error) => {
+      this.loading = false;
+      console.log(error);
+    })
   }
 }
