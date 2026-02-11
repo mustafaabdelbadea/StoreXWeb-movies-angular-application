@@ -27,6 +27,8 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'npm'
+      - name: Install angular cli
+        run: npm install -g @angular/cli
 
       - name: Install dependencies
         run: npm install
